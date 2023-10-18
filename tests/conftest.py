@@ -1,13 +1,10 @@
 import os
-import time
 
 import pytest
 from appium import webdriver
+
 """from appium.options.common import AppiumOptions"""
 from appium.webdriver.common.appiumby import AppiumBy
-from appium.webdriver.common.touch_action import TouchAction
-from appium.webdriver.webdriver import WebDriver
-from selenium.webdriver.support.wait import WebDriverWait
 from appium.options.android import UiAutomator2Options
 
 ANDROID_APP_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../app')
@@ -37,23 +34,18 @@ def driver():
     driver.quit()
 
 
-# v2
-# @pytest.fixture()
-# def driver():
-#     print("Running on:", appium_server_url)
-#     driver = webdriver.Remote(appium_server_url, options=capabilities_options)
-#     driver.implicitly_wait(5)
-#     # request.cls.driver = driver
-#     yield driver
-#     driver.quit()
+"""First test"""
 
 
 def test_1(driver):
     ozon_page = driver
-    action = TouchAction(ozon_page)
-    # action.tap(x=223, y=1853)
-    # ozon_page.find_element(by=AppiumBy.ACCESSIBILITY_ID, value='HandlerView')
+    try:
+        ozon_page.find_element(by=AppiumBy.ACCESSIBILITY_ID, value='HandlerView')
+        ozon_page.back()
+    except Exception as ex:
+        print(ex)
     # ozon_page.swipe(start_y=1020, start_x=500, end_y=1700, end_x=500)
+
     ozon_page.find_element(by=AppiumBy.ACCESSIBILITY_ID, value='Главная').click()
     catalog = ozon_page.find_element(by=AppiumBy.XPATH,
                                      value='//android.view.ViewGroup[@content-desc="Каталог"]'
@@ -62,25 +54,24 @@ def test_1(driver):
     search = ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/searchTv')
     search.click()
     ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/searchEt').send_keys('мяч')
-    # ozon_page.find_element(by=AppiumBy.XPATH, value='//android.view.ViewGroup'
-    #                                                 '[@content-desc="мяч футбольный"]/android.widget.TextView').click()
-    # ozon_page.find_element(by=AppiumBy.XPATH, value='(//android.widget.FrameLayout[@content-desc="grid"])'
-    #                                                 '[1]/android.view.ViewGroup/android.widget.FrameLayout').click()
-    #
-    # ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/btnTitleTv')
-    # ozon_page.swipe(start_y=1400, start_x=500, end_y=700, end_x=500)
-    #
-    # price = ozon_page.find_element(by=AppiumBy.XPATH,
-    #                                value='//android.view.ViewGroup[@content-desc="21,47 BYN"]'
-    #                                      '/android.widget.TextView[1]').text
-    # print(price)
-    # ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/btnTitleTv').click()
-    # inbox = ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/btnTitleTv')
-    # assert inbox.text == 'В корзине'
-    #
-    # ozon_page.find_element(by=AppiumBy.XPATH, value='//android.view.ViewGroup[@content-desc="Корзина"]'
-    #                                                 '/android.widget.ImageView').click()
-    # price_in_cart = ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/totalStickyInfoText').text
-    # print(price_in_cart)
-    # assert price == price_in_cart
+    ozon_page.find_element(by=AppiumBy.XPATH, value='//android.view.ViewGroup'
+                                                    '[@content-desc="мяч футбольный"]/android.widget.TextView').click()
+    ozon_page.find_element(by=AppiumBy.XPATH, value='(//android.widget.FrameLayout[@content-desc="grid"])'
+                                                    '[1]/android.view.ViewGroup/android.widget.FrameLayout').click()
 
+    ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/btnTitleTv')
+    ozon_page.swipe(start_y=1400, start_x=500, end_y=700, end_x=500)
+
+    price = ozon_page.find_element(by=AppiumBy.XPATH,
+                                   value='//android.view.ViewGroup[@content-desc="21,47 BYN"]'
+                                         '/android.widget.TextView[1]').text
+    print(price)
+    ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/btnTitleTv').click()
+    inbox = ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/btnTitleTv')
+    assert inbox.text == 'В корзине'
+
+    ozon_page.find_element(by=AppiumBy.XPATH, value='//android.view.ViewGroup[@content-desc="Корзина"]'
+                                                    '/android.widget.ImageView').click()
+    price_in_cart = ozon_page.find_element(by=AppiumBy.ID, value='ru.ozon.app.android:id/totalStickyInfoText').text
+    print(price_in_cart)
+    assert price == price_in_cart
