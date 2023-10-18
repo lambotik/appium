@@ -1,6 +1,4 @@
-
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.common.by import By
 
 
 class OzonPageLocators:
@@ -8,5 +6,4 @@ class OzonPageLocators:
     HANDLER_VIEW = (AppiumBy.ACCESSIBILITY_ID, 'HandlerView')
     MAIN = (AppiumBy.ACCESSIBILITY_ID, 'Главная')
     CATALOG = (AppiumBy.ACCESSIBILITY_ID, "Каталог")
-
-
+    ADVERTISING = (AppiumBy.ID, 'ru.ozon.app.android:id/touch_outside')
