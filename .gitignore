@@ -7,6 +7,8 @@ __pycache__/
 *.so
 
 .idea
+/shelf/
+/workspace.xml
 # Distribution / packaging
 .Python
 build/
