@@ -6,3 +6,6 @@ class TestOzonMarket:
         start_page = OzonStartPage(driver)
         start_page.check()
 
+    # def test_something(self, driver):
+    #     start_page = OzonStartPage(driver)
+    #     print(start_page.get_settings())
