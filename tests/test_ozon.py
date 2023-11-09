@@ -1,5 +1,3 @@
-import time
-
 from pages.ozon_start_page import OzonStartPage
 
 
