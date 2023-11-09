@@ -9,4 +9,5 @@ class BasePage(WebDriver):
         self.timeout = 10
 
     def element_is_presence(self, locator):
-        return wait(self.driver, self.timeout).until(ec.presence_of_element_located(locator))
+        return wait(self.driver, self.timeout).until(ec.presence_of_element_located(locator),
+                                                     message=f'Element not found by locator: {locator}')
